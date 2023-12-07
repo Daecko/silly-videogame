@@ -10,6 +10,11 @@ body {
 main {
     flex: 1;
 }
+canvas{
+    border-color: red;
+    border-style: dashed;
+    border-width: 1px;
+}
 
 footer {
     position: sticky;
