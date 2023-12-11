@@ -9,11 +9,11 @@ function getMousePos(canvas, evt) {
     return {
       x: evt.clientX - rect.left,
       y: evt.clientY - rect.top
-    };
-  }
+  };
+}
 canvas.addEventListener("click",(evt)=>{
     var pos = getMousePos(canvas,evt);
     context.fillStyle = "green";
     context.clearRect(0,0,canvas.width,canvas.height);
     context.fillRect(pos.x-square/2,pos.y-square/2,square,square);
-})
+});
