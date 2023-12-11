@@ -14,11 +14,11 @@ main {
 #Log {
     margin: 3rem;
 }
-#Log ul {
+/*#Log ul {
     display:inline-block;
     padding: 0;
     max-width: fit-content;
-} /*Solid half an hour spent on learning how to place the list in the middle*/
+} Now this is useless until i want another list*/
 canvas{
     border-color: red;
     border-style: dashed;
