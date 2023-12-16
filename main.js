@@ -40,64 +40,62 @@ function gameState () {
   //console.log(`${game[0][0]==game[1][1]} and ${game[1][1]} and ${game[2][2]}`); //I separated the [] using commas. + 2 hours
   return null;
 }
-function tic (pos) {
+const drawings = {
+  0:(x,y)=>{
+  context.clearRect(x-100,y-100,100,100);
+  context.beginPath()
+  context.moveTo(x-75,y-75);
+  context.lineTo(x-25,y-25);
+  context.stroke();
+  context.moveTo(x-75,y-25);
+  context.lineTo(x-25,y-75);
+  context.stroke();
+},
+1:(x,y)=>{
+  context.clearRect(x-100,y-100,100,100);
+  context.beginPath();
+  context.arc(x-50,y-50,30,0,2*Math.PI);
+  context.stroke()
+}}
+function ticTac (pos) {
   var {x,y} = pos;
+  if(gameState()!=null){
+    return null;
+  }
   if(x<101 && y<101){
+    drawings[player](100,100);
     game[0][0]=player;
   }
   else if(x<201 && y<101){
+    drawings[player](200,100);
     game[0][1]=player;
   }
   else if(x<301 && y<101){
+    drawings[player](300,100);
     game[0][2]=player;
   }
   else if(x<101 && y<201){
+    drawings[player](100,200);
     game[1][0]=player;
   }
   else if(x<201 && y<201){
+    drawings[player](200,200);
     game[1][1]=player;
   }
   else if(x<301 && y<201){
+    drawings[player](300,200);
     game[1][2]=player;
   }
   else if(x<101 && y<301){
+    drawings[player](100,300);
     game[2][0]=player;
   }
   else if(x<201 && y<301){
+    drawings[player](200,300);
     game[2][1]=player;
   }
   else if(x<301 && y<301){
-    game[2][2]=player;
-  }
-  return gameState();
-}
-function tac (pos) {
-  var {x,y} = pos;
-  if(x<101 && y<101){
-    game[0][0]=player;
-  }
-  else if(x<201 && y<101){
-    game[0][1]=player;
-  }
-  else if(x<301 && y<101){
-    game[0][2]=player;
-  }
-  else if(x<101 && y<201){
-    game[1][0]=player;
-  }
-  else if(x<201 && y<201){
-    game[1][1]=player;
-  }
-  else if(x<301 && y<201){
-    game[1][2]=player;
-  }
-  else if(x<101 && y<301){
-    game[2][0]=player;
-  }
-  else if(x<201 && y<301){
-    game[2][1]=player;
-  }
-  else if(x<301 && y<301){
+    drawings[player](300,300);
     game[2][2]=player;
   }
   return gameState();
@@ -111,19 +109,18 @@ function getMousePos(canvas, evt) {
 }
 canvas.addEventListener("click",(evt)=>{
   var pos = getMousePos(canvas,evt);
-  var winner = null
-  winner = player==0 ? tic(pos) : tac(pos);
+  var winner = ticTac(pos);
   ASCII.innerHTML = 
   `
-  ${game[0][0]}|${game[0][1]}|${game[0][2]}<br>
-  --------<br>
-  ${game[1][0]}|${game[1][1]}|${game[1][2]}<br>
-  ${game[2][0]}|${game[2][1]}|${game[2][2]}
+  ${game[0][0]==0?'x':game[0][0]==null?'z':'o'}|${game[0][1]==0?'x':game[0][1]==null?'z':'o'}|${game[0][2]==0?'x':game[0][2]==null?'z':'o'}<br>
+  ${game[1][0]==0?'x':game[1][0]==null?'z':'o'}|${game[1][1]==0?'x':game[1][1]==null?'z':'o'}|${game[1][2]==0?'x':game[1][2]==null?'z':'o'}<br>
+  ${game[2][0]==0?'x':game[2][0]==null?'z':'o'}|${game[2][1]==0?'x':game[2][1]==null?'z':'o'}|${game[2][2]==0?'x':game[2][2]==null?'z':'o'}
   `
   if(winner!=null){
     gameStateDisplay.innerHTML = `${player==0 ? "Player 1" : "Player 2"} Wins!`
+  }else{
+    player=player==0 ? 1 : 0;
   }
-  player=player==0 ? 1 : 0;
 });
 buttonC.addEventListener("click",() => {
   location.reload();
