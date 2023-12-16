@@ -110,12 +110,12 @@ function getMousePos(canvas, evt) {
 canvas.addEventListener("click",(evt)=>{
   var pos = getMousePos(canvas,evt);
   var winner = ticTac(pos);
-  ASCII.innerHTML = 
+  /*ASCII.innerHTML = 
   `
   ${game[0][0]==0?'x':game[0][0]==null?'z':'o'}|${game[0][1]==0?'x':game[0][1]==null?'z':'o'}|${game[0][2]==0?'x':game[0][2]==null?'z':'o'}<br>
   ${game[1][0]==0?'x':game[1][0]==null?'z':'o'}|${game[1][1]==0?'x':game[1][1]==null?'z':'o'}|${game[1][2]==0?'x':game[1][2]==null?'z':'o'}<br>
   ${game[2][0]==0?'x':game[2][0]==null?'z':'o'}|${game[2][1]==0?'x':game[2][1]==null?'z':'o'}|${game[2][2]==0?'x':game[2][2]==null?'z':'o'}
-  `
+  `*/
   if(winner!=null){
     gameStateDisplay.innerHTML = `${player==0 ? "Player 1" : "Player 2"} Wins!`
   }else{
